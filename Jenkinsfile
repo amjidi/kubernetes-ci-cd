@@ -33,9 +33,11 @@ node {
         app.push()
     */
     
-   gitCred = credentials('gitlab-reg-credentials')
+   withCredentials([
+    usernamePassword(credentialsId: gitlab-reg-credentials, usernameVariable: 'USER1', passwordVariable: 'PASS1'),
+    ]){
        
-    sh "docker login registry.gitlab.com -u amjidi -p ${gitCred_PSW}"
+       sh "docker login registry.gitlab.com -u ${USER1} -p ${PASS1}"
     
     sh "docker push ${imageName}"
    
