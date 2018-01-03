@@ -34,8 +34,7 @@ node {
     */
     
    withCredentials([
-    usernamePassword(credentialsId: gitlab-reg-credentials, usernameVariable: 'USER1', passwordVariable: 'PASS1'),
-    ]){
+    usernamePassword(credentialsId: gitlab-reg-credentials, usernameVariable: 'USER1', passwordVariable: 'PASS1')]){
        
        sh "docker login registry.gitlab.com -u ${USER1} -p ${PASS1}"
     
