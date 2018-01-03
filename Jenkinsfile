@@ -1,8 +1,6 @@
 node {
 
-    environment {
-       gitCred = credentials('gitlab-reg-credentials')
-    }
+    def git_creds = 'gitlab-reg-credentials'
     
     def app
     checkout scm
@@ -34,7 +32,7 @@ node {
     */
     
    withCredentials([
-      [$class: 'UsernamePasswordMultiBinding', credentialsId: gitlab-reg-credentials, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS'],
+      [$class: 'UsernamePasswordMultiBinding', credentialsId: git_creds, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS'],
   ]){
        
     sh "docker login registry.gitlab.com -u ${GIT_USER} -p ${GIT_PASS}"
