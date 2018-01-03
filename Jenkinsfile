@@ -16,13 +16,16 @@ node {
     
         sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
     
-    stage "Push"
+    stage "Push" {
         
         docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         sh "docker push ${imageName}"
-
-    stage "Deploy"
+     }
+    
+    stage "Deploy" {
 
         sh "sed 's#registry.gitlab.com/amjidi/kubernetes-pipeline/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply -f -"
         sh "kubectl rollout status deployment/hello-kenzan"
+
+    }
 }
