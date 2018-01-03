@@ -31,8 +31,10 @@ node {
         
     /*    docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         app.push()
-    */   
-        sh "docker login registry.gitlab.com -u amjidi -p $gitCred_PSW"
+    */environment {
+       gitCred = credentials('gitlab-reg-credentials')
+    }   
+    sh "docker login registry.gitlab.com -u amjidi -p ${gitCred_PSW}"
         sh "docker push ${imageName}"
       
      
