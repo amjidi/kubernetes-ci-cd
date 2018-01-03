@@ -13,16 +13,16 @@ node {
     imageName = "${registryHost}${appName}:${tag}"
     env.BUILDIMG=imageName
 
-    stage "Build" {
+    stage "Build" 
     
     sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
     
       
     /*app = docker.build(${imageName}, "-f applications/hello-kenzan/Dockerfile applications/hello-kenzan")
     */
-    }
     
-    stage "Push" {
+    
+    stage "Push" 
         
     /*    docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         app.push()
@@ -30,7 +30,7 @@ node {
         sh "docker login registry.gitlab.com -u amjidi -p ${gitlab-reg-credentials}"
         sh "docker push ${imageName}"
       
-     }
+     
   /*  
     stage "Deploy" {
 
