@@ -17,7 +17,8 @@ node {
         sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
     
     stage "Push"
-
+        
+        docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         sh "docker push ${imageName}"
 
     stage "Deploy"
