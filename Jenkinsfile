@@ -43,12 +43,12 @@ node {
    }
 
     
-  /*  
-    stage "Deploy" {
+    
+    stage('Deploy' {
 
         sh "sed 's#registry.gitlab.com/amjidi/kubernetes-pipeline/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply -f -"
         sh "kubectl rollout status deployment/hello-kenzan"
 
     }
-    */
+    
 }
