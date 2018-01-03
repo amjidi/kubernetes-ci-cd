@@ -27,21 +27,23 @@ node {
     */
     
     
-    stage('Push') { 
+  stage('Push') { 
         
     /*    docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         app.push()
     */
     
    withCredentials([
-    usernamePassword(credentialsId: gitlab-reg-credentials, usernameVariable: 'USER1', passwordVariable: 'PASS1')]){
+      [$class: 'UsernamePasswordMultiBinding', credentialsId: gitlab-reg-credentials, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS'],
+  ]){
        
-       sh "docker login registry.gitlab.com -u ${USER1} -p ${PASS1}"
+    sh "docker login registry.gitlab.com -u ${GIT_USER} -p ${GIT_PASS}"
     
     sh "docker push ${imageName}"
    
    }
-    }
+   }
+
     
   /*  
     stage "Deploy" {
