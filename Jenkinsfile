@@ -41,6 +41,7 @@ node {
     sh "docker push ${imageName}"
    
    }
+    }
     
   /*  
     stage "Deploy" {
