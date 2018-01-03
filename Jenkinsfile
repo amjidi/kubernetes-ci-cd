@@ -27,7 +27,7 @@ node {
     */
     
     
-    stage "Push" 
+    stage "Push" {
         
     /*    docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         app.push()
@@ -39,6 +39,7 @@ node {
     sh "docker login registry.gitlab.com -u amjidi -p ${gitCred_PSW}"
         sh "docker push ${imageName}"
     }  
+    }
      
   /*  
     stage "Deploy" {
