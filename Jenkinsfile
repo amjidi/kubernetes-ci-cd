@@ -1,9 +1,14 @@
 node {
 
+    environment {
+       gitCred = credentials('gitlab-reg-credentials')
+    }
+    
     def app
     checkout scm
 
     env.DOCKER_API_VERSION="1.23"
+    
     
     sh "git rev-parse --short HEAD > commit-id"
 
@@ -27,7 +32,7 @@ node {
     /*    docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         app.push()
     */   
-        sh "docker login registry.gitlab.com -u amjidi -p ${gitlab-reg-credentials}"
+        sh "docker login registry.gitlab.com -u amjidi -p $gitCred_PSW"
         sh "docker push ${imageName}"
       
      
