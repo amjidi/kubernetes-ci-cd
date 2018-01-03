@@ -30,8 +30,11 @@ spec:
         tier: hello-kenzan
     spec:
       containers:
-      - image: 127.0.0.1:30400/hello-kenzan:latest
+      - image: registry.gitlab.com/amjidi/kubernetes-pipeline/hello-kenzan:latest
         name: hello-kenzan
         ports:
         - containerPort: 80
           name: hello-kenzan
+      imagePullSecrets:
+      - name: regsecret
+
