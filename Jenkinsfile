@@ -1,5 +1,6 @@
 node {
 
+    def app
     checkout scm
 
     env.DOCKER_API_VERSION="1.23"
