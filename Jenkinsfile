@@ -15,25 +15,28 @@ node {
 
     stage "Build" {
     
-    /*   sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
-    */
+    sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
+    
       
-    app = docker.build(${imageName}, "-f applications/hello-kenzan/Dockerfile applications/hello-kenzan")
+    /*app = docker.build(${imageName}, "-f applications/hello-kenzan/Dockerfile applications/hello-kenzan")
+    */
     }
     
     stage "Push" {
         
-        docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
+    /*    docker.withRegistry('https://registry.gitlab.com/amjidi/kubernetes-pipeline', 'gitlab-reg-credentials')  
         app.push()
-       
-      /*  sh "docker push ${imageName}"
-        */
+    */   
+        sh "docker login registry.gitlab.com -u amjidi -p ${gitlab-reg-credentials}"
+        sh "docker push ${imageName}"
+      
      }
-    
+  /*  
     stage "Deploy" {
 
         sh "sed 's#registry.gitlab.com/amjidi/kubernetes-pipeline/hello-kenzan:latest#'$BUILDIMG'#' applications/hello-kenzan/k8s/deployment.yaml | kubectl apply -f -"
         sh "kubectl rollout status deployment/hello-kenzan"
 
     }
+    */
 }
