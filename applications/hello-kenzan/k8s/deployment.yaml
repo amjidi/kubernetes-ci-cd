@@ -6,7 +6,7 @@ metadata:
     app: hello-kenzan
 spec:
   ports:
-    - port: 8080
+    - port: 8090
       targetPort: 80
   selector:
     app: hello-kenzan
